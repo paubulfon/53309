@@ -1,62 +1,146 @@
-import CalculatorLexer from "./generated/CalculatorLexer.js";
-import CalculatorParser from "./generated/CalculatorParser.js";
-import { CustomCalculatorListener } from "./CustomCalculatorListener.js";
-import { CustomCalculatorVisitor } from "./CustomCalculatorVisitor.js";
-import antlr4, { CharStreams, CommonTokenStream, ParseTreeWalker } from "antlr4";
+import ComandosLexer from "./generated/ComandosLexer.js";
+import ComandosParser from "./generated/ComandosParser.js";
+import { CustomComandosVisitor } from "./CustomComandosVisitor.js";
+import antlr4, { CharStreams, CommonTokenStream } from "antlr4";
 import readline from 'readline';
 import fs from 'fs';
 
+let hayErroresLexicos = false;
+
 async function main() {
     let input;
-
-    // Intento leer la entrada desde el archivo input - en forma sincrona.
+    // Leer archivo
     try {
         input = fs.readFileSync('input.txt', 'utf8');
     } catch (err) {
-        // Si no es posible leer el archivo, solicitar la entrada del usuario por teclado
-        input = await leerCadena(); // Simula lectura síncrona
+        input = await leerCadena();
         console.log(input);
     }
 
-    // Proceso la entrada con el analizador e imprimo el arbol de analisis en formato texto
+    // Lexer
     let inputStream = CharStreams.fromString(input);
-    let lexer = new CalculatorLexer(inputStream);
+    let lexer = new ComandosLexer(inputStream);
+    lexer.removeErrorListeners();
+    lexer.addErrorListener({
+
+        syntaxError(recognizer, offendingSymbol, line, column, msg) {
+
+            hayErroresLexicos = true;
+
+        const simbolo = msg.match(/'(.*?)'/)?.[1];
+
+        console.error(
+            `Error léxico en línea ${line}: símbolo '${simbolo}' no reconocido`
+        );
+        }
+    });
     let tokenStream = new CommonTokenStream(lexer);
-    let parser = new CalculatorParser(tokenStream);
-    let tree = parser.prog();
+
+    // TABLA DE TOKENS
+    tokenStream.fill();
+
+    console.log("\nTABLA DE TOKENS:");
+
+    tokenStream.tokens.forEach(token => {
+
+        if (token.type !== antlr4.Token.EOF) {
+
+            const tokenName =
+                ComandosLexer.symbolicNames[token.type];
+
+            console.log(
+                `Lexema: ${token.text} -> Tipo de token: ${tokenName}`
+            );
+        }
+    });
+    if (hayErroresLexicos) {
+
+    console.log("\nANÁLISIS CANCELADO POR ERRORES LÉXICOS.");
+
+    return;
+    }
+    // Parser
+    let parser = new ComandosParser(tokenStream);
     
-    // Verifico si se produjeron errores
+    // Eliminar listener de errores por defecto
+    parser.removeErrorListeners();
+
+        parser.addErrorListener({
+
+        syntaxError(recognizer, offendingSymbol, line, column, msg) {
+
+            let mensaje = "Error de sintaxis.";
+
+           if (msg.includes("missing ID")) {
+
+                mensaje = "faltó un identificador después del signo '-'";
+            }
+
+            else if (
+                msg.includes("missing {NUMERO, CADENA}")
+            ) {
+
+                mensaje = "faltó un número o una cadena después del signo '='";
+            }
+
+            else if (msg.includes("extraneous input")) {
+
+                mensaje = "se encontró un símbolo inesperado";
+            }
+
+            else if (msg.includes("mismatched input")) {
+
+                mensaje = "la estructura de la entrada no es válida";
+            }
+
+            console.error(
+                `Error sintáctico en línea ${line}: ${mensaje}`
+            );
+        }
+    });
+
+    let tree = parser.prog();
+
+    // Verificar errores
     if (parser.syntaxErrorsCount > 0) {
-        console.error("\nSe encontraron errores de sintaxis en la entrada.");
-    } 
-    else {
+
+    console.log("\nANÁLISIS CANCELADO POR ERRORES SINTÁCTICOS.");
+
+    return;
+    } else {
+
         console.log("\nEntrada válida.");
+
+        // Árbol sintáctico
         const cadena_tree = tree.toStringTree(parser.ruleNames);
-        console.log(`Árbol de derivación: ${cadena_tree}`);
 
-        // Utilizo un listener y un walker para recorrer el arbol e indicar cada vez que reconoce una sentencia (stat)
-        //const listener = new CustomCalculatorListener();
-        // ParseTreeWalker.DEFAULT.walk(listener, tree);
+        console.log(`\nÁrbol de derivación:\n${cadena_tree}`);
 
-        // Utilizo un visitor para visitar los nodos que me interesan de mi arbol
-        const visitor = new CustomCalculatorVisitor();
-        visitor.visit(tree);   
+        // Visitor
+        const visitor = new CustomComandosVisitor();
+
+        visitor.visit(tree);
+        console.log("\nANÁLISIS FINALIZADO CORRECTAMENTE.");
     }
 }
 
 function leerCadena() {
+
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
     });
 
     return new Promise(resolve => {
+
         rl.question("Ingrese una cadena: ", (answer) => {
+
             rl.close();
+
             resolve(answer);
         });
     });
 }
 
-// Ejecuta la función principal
+// Ejecutar
 main();
