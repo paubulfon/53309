@@ -1,4 +1,4 @@
-import ComandosListener from "./generated/ComandosListener.js";
+import ComandosListener from "../generated/ComandosListener.js";
 
 export class CustomComandosListener extends ComandosListener {
 
