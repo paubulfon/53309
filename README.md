@@ -31,24 +31,44 @@ El analizador procesa comandos definidos mediante una gramática escrita en ANTL
 
 ---
 
-# Estructura del proyecto
+# Estructura del Proyecto
 
 ```text
-.
-├── generated/
-│   ├── ComandosLexer.js
-│   ├── ComandosParser.js
-│   ├── ComandosVisitor.js
-│   └── ComandosListener.js
+53309/
 │
-├── Comandos.g4
-├── CustomComandosVisitor.js
-├── CustomComandosListener.js
-├── index.js
-├── input.txt
-├── package.json
-└── README.md
+├── .vscode/
+│   └── launch.json
+│
+├── README.md
+│
+├── gramatica_EBNF.txt
+│
+├── ejemplos/
+│   ├── ejemplo_correcto_1.txt
+│   ├── ejemplo_correcto_2.txt
+│   ├── ejemplo_error_lexico.txt
+│   └── ejemplo_error_sintactico.txt
+│
+└── proyecto Node JS/
+    │
+    ├── generated/
+    │   ├── ComandosLexer.js
+    │   ├── ComandosParser.js
+    │   ├── ComandosVisitor.js
+    │   └── ...
+    │
+    ├── .antlr/
+    │
+    ├── Comandos.g4
+    ├── index.js
+    ├── CustomComandosVisitor.js
+    ├── CustomComandosListener.js
+    ├── input.txt
+    ├── package.json
+    ├── package-lock.json
+    └── antlr-4.13.2-complete.jar
 ```
+
 
 ---
 
