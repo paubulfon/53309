@@ -1,4 +1,4 @@
-import ComandosVisitor from "../generated/ComandosVisitor.js";
+import ComandosVisitor from "./generated/ComandosVisitor.js";
 
 export class CustomComandosVisitor extends ComandosVisitor {
     
