@@ -201,7 +201,7 @@ CustomComandosVisitor.js
 ## 1. Clonar el repositorio
 
 ```bash
-git clone URL_DEL_REPOSITORIO
+git clone https://github.com/paubulfon/53309.git
 ```
 
 ---
