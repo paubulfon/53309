@@ -1,1 +1,1 @@
-programa -nombre="Juan" -edad=20 -admin
+programa -
