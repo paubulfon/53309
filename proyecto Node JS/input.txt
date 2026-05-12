@@ -1,1 +1,1 @@
-programa -debug
+programa -nombre="Juan" -edad=20 -admin

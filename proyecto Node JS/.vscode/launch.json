@@ -1,0 +1,15 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug ANTLR4 grammar",
+            "type": "antlr-debug",
+            "request": "launch",
+            "input": "proyecto Node JS/input.txt",
+            "grammar": "proyecto Node JS/Comandos.g4",
+            "startRule": "prog",
+            "printParseTree": true,
+            "visualParseTree": true
+        }
+    ]
+}
