@@ -1,0 +1,11 @@
+SUB=1
+EQ=2
+QUOTE=3
+ID=4
+NUMERO=5
+CADENA=6
+NEWLINE=7
+WS=8
+'-'=1
+'='=2
+'"'=3
