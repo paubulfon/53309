@@ -1,6 +1,7 @@
 # Analizador Léxico y Sintáctico con ANTLR4 y JavaScript
 
-## Sintaxis y Semántica de Lenguajes  
+## Sintaxis y Semántica de Lenguajes
+
 Ingeniería en Sistemas de Información – UTN FRM
 
 ---
@@ -11,23 +12,23 @@ Este proyecto implementa un analizador léxico, sintáctico y semántico utiliza
 
 El analizador procesa comandos definidos mediante una gramática escrita en ANTLR4 y permite:
 
-- realizar análisis léxico,
-- realizar análisis sintáctico,
-- detectar errores léxicos y sintácticos,
-- generar una tabla de lexemas y tokens,
-- construir el árbol de derivación,
-- interpretar la entrada,
-- generar código JavaScript,
-- ejecutar el código generado.
+* realizar análisis léxico,
+* realizar análisis sintáctico,
+* detectar errores léxicos y sintácticos,
+* generar una tabla de lexemas y tokens,
+* construir el árbol de derivación,
+* interpretar la entrada,
+* generar código JavaScript,
+* ejecutar el código generado.
 
 ---
 
 # Tecnologías utilizadas
 
-- ANTLR4
-- JavaScript
-- Node.js
-- Visual Studio Code
+* ANTLR4
+* JavaScript
+* Node.js
+* Visual Studio Code
 
 ---
 
@@ -68,7 +69,6 @@ El analizador procesa comandos definidos mediante una gramática escrita en ANTL
     ├── package-lock.json
     └── antlr-4.13.2-complete.jar
 ```
-
 
 ---
 
@@ -153,11 +153,11 @@ Ejemplo:
 
 Se implementó un Visitor personalizado (`CustomComandosVisitor.js`) que:
 
-- recorre el árbol sintáctico,
-- interpreta los comandos,
-- genera objetos JavaScript,
-- construye código JavaScript dinámicamente,
-- ejecuta el código generado.
+* recorre el árbol sintáctico,
+* interpreta los comandos,
+* genera objetos JavaScript,
+* construye código JavaScript dinámicamente,
+* ejecuta el código generado.
 
 ---
 
@@ -165,10 +165,10 @@ Se implementó un Visitor personalizado (`CustomComandosVisitor.js`) que:
 
 ANTLR4 genera automáticamente:
 
-- Lexer
-- Parser
-- Visitor
-- Listener
+* Lexer
+* Parser
+* Visitor
+* Listener
 
 mediante el comando:
 
@@ -206,7 +206,15 @@ git clone https://github.com/paubulfon/53309.git
 
 ---
 
-## 2. Instalar dependencias
+## 2. Ingresar a la carpeta del proyecto
+
+```bash
+cd "53309/proyecto Node JS"
+```
+
+---
+
+## 3. Instalar dependencias
 
 ```bash
 npm install
@@ -214,7 +222,7 @@ npm install
 
 ---
 
-## 3. Generar lexer y parser
+## 4. Generar lexer y parser
 
 ```bash
 java -jar antlr-4.13.2-complete.jar -Dlanguage=JavaScript Comandos.g4 -o generated -visitor
@@ -235,6 +243,38 @@ Para ejecutar el analizador:
 ```bash
 npm start
 ```
+
+---
+
+# Visualización del árbol sintáctico
+
+Para visualizar el árbol sintáctico gráficamente en Visual Studio Code:
+
+1. Instalar la extensión:
+
+```text
+ANTLR4 grammar syntax support
+```
+
+2. Abrir el archivo:
+
+```text
+Comandos.g4
+```
+
+3. Presionar:
+
+```text
+F5
+```
+
+o utilizar:
+
+```text
+ANTLR4: Open Preview
+```
+
+desde la paleta de comandos de VS Code.
 
 ---
 
@@ -304,13 +344,13 @@ Error sintáctico en línea 1: faltó un identificador después del signo '-'
 
 ANTLR4 genera automáticamente:
 
-- `ComandosVisitor.js`
-- `ComandosListener.js`
+* `ComandosVisitor.js`
+* `ComandosListener.js`
 
 Luego se implementaron clases personalizadas:
 
-- `CustomComandosVisitor.js`
-- `CustomComandosListener.js`
+* `CustomComandosVisitor.js`
+* `CustomComandosListener.js`
 
 El Visitor fue utilizado para agregar semántica e interpretación al lenguaje.
 
@@ -320,11 +360,12 @@ El Listener se incluye únicamente con fines ilustrativos.
 
 # Referencias bibliográficas
 
-- Terrence Parr, *The Definitive ANTLR 4 Reference*
-- Sitio oficial de ANTLR: https://www.antlr.org
-- Material de cátedra SSL – UTN FRM
+* Terrence Parr, *The Definitive ANTLR 4 Reference*
+* Sitio oficial de ANTLR: https://www.antlr.org
+* Material de cátedra SSL – UTN FRM
 
 ---
+
 
 # Autor
 
