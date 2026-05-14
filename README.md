@@ -69,6 +69,11 @@ El analizador procesa comandos definidos mediante una gramática escrita en ANTL
     ├── package-lock.json
     └── antlr-4.13.2-complete.jar
 ```
+## Aclaración sobre la carpeta `.vscode`
+
+Se incluye la carpeta `.vscode` con el archivo `launch.json` para facilitar la visualización y depuración del árbol sintáctico utilizando la extensión de ANTLR4 en Visual Studio Code.
+
+Esta carpeta no forma parte de la lógica del analizador, pero permite ejecutar directamente el preview del árbol de derivación mediante la configuración `antlr-debug`.
 
 ---
 
