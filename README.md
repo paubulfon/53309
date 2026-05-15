@@ -34,7 +34,7 @@ El analizador procesa comandos definidos mediante una gramática escrita en ANTL
 
 # Estructura del Proyecto
 
-```text
+```text id="dqk0zf"
 53309/
 │
 ├── .vscode/
@@ -69,7 +69,10 @@ El analizador procesa comandos definidos mediante una gramática escrita en ANTL
     ├── package-lock.json
     └── antlr-4.13.2-complete.jar
 ```
-## Aclaración sobre la carpeta `.vscode`
+
+---
+
+# Aclaración sobre la carpeta `.vscode`
 
 Se incluye la carpeta `.vscode` con el archivo `launch.json` para facilitar la visualización y depuración del árbol sintáctico utilizando la extensión de ANTLR4 en Visual Studio Code.
 
@@ -79,7 +82,7 @@ Esta carpeta no forma parte de la lógica del analizador, pero permite ejecutar 
 
 # Gramática implementada
 
-```antlr
+```antlr id="q8x4pv"
 grammar Comandos ;
 
 //Gramatica
@@ -114,13 +117,13 @@ El lexer divide la entrada en tokens reconocidos por la gramática.
 
 Ejemplo:
 
-```text
+```text id="g3r9ya"
 programa -nombre="Juan"
 ```
 
 Tokens generados:
 
-```text
+```text id="b3m9sl"
 Lexema: programa -> Tipo de token: ID
 Lexema: - -> Tipo de token: SUB
 Lexema: nombre -> Tipo de token: ID
@@ -142,13 +145,13 @@ Si la entrada es válida, se construye el árbol sintáctico.
 
 El árbol sintáctico se muestra en formato texto utilizando:
 
-```javascript
+```javascript id="r6y1tp"
 tree.toStringTree(parser.ruleNames)
 ```
 
 Ejemplo:
 
-```text
+```text id="q2k4dr"
 (prog (comando programa (opcion - nombre = (valor "Juan"))) <EOF>)
 ```
 
@@ -177,13 +180,13 @@ ANTLR4 genera automáticamente:
 
 mediante el comando:
 
-```bash
+```bash id="m8y2vf"
 java -jar antlr-4.13.2-complete.jar -Dlanguage=JavaScript Comandos.g4 -o generated -visitor
 ```
 
 Los archivos generados se almacenan en la carpeta:
 
-```text
+```text id="s9x6ku"
 generated/
 ```
 
@@ -195,25 +198,44 @@ Los archivos generados automáticamente por ANTLR4 no deben modificarse manualme
 
 Por esta razón, la lógica semántica fue implementada en:
 
-```text
+```text id="n2r5yb"
 CustomComandosVisitor.js
 ```
 
 ---
 
-# Instalación
+# Instalación y ejecución
+
+## Requisitos previos
+
+Para ejecutar el proyecto se requiere tener instalado:
+
+* Node.js
+* Java JDK
+* Visual Studio Code (opcional)
+* Extensión `ANTLR4 grammar syntax support` para VS Code (opcional para visualizar el árbol)
+
+---
 
 ## 1. Clonar el repositorio
 
-```bash
+Abrir una terminal y ejecutar:
+
+```bash id="t7k2cw"
 git clone https://github.com/paubulfon/53309.git
+```
+
+Esto descargará el proyecto en una carpeta llamada:
+
+```text id="v4r9ml"
+53309
 ```
 
 ---
 
-## 2. Ingresar a la carpeta del proyecto
+## 2. Ingresar a la carpeta del proyecto Node.js
 
-```bash
+```bash id="x3q1jt"
 cd "53309/proyecto Node JS"
 ```
 
@@ -221,33 +243,62 @@ cd "53309/proyecto Node JS"
 
 ## 3. Instalar dependencias
 
-```bash
+Ejecutar:
+
+```bash id="d8m7qo"
 npm install
 ```
 
+Esto instalará automáticamente las dependencias necesarias para ejecutar el analizador.
+
 ---
 
-## 4. Generar lexer y parser
+## 4. Generar lexer y parser (opcional)
 
-```bash
+Los archivos generados por ANTLR4 ya se incluyen en el repositorio.
+
+Sin embargo, si se modifica la gramática `Comandos.g4`, se deben regenerar ejecutando:
+
+```bash id="h1t9pk"
 java -jar antlr-4.13.2-complete.jar -Dlanguage=JavaScript Comandos.g4 -o generated -visitor
 ```
 
 ---
 
-# Ejecución
+## 5. Configurar la entrada
 
-La entrada se encuentra en:
+La entrada a analizar se encuentra en el archivo:
 
-```text
+```text id="j6s2nr"
 input.txt
 ```
 
-Para ejecutar el analizador:
+Modificar dicho archivo con la cadena que se desea analizar.
 
-```bash
+Ejemplo:
+
+```text id="c5v8yu"
+programa -nombre="Juan" -edad=20 -admin
+```
+
+---
+
+## 6. Ejecutar el analizador
+
+Ejecutar:
+
+```bash id="p4m8tz"
 npm start
 ```
+
+El programa mostrará:
+
+* tabla de tokens,
+* árbol de derivación,
+* interpretación semántica,
+* código JavaScript generado,
+* ejecución del código generado,
+* errores léxicos y sintácticos (si existen).
 
 ---
 
@@ -257,25 +308,25 @@ Para visualizar el árbol sintáctico gráficamente en Visual Studio Code:
 
 1. Instalar la extensión:
 
-```text
+```text id="k2r9qw"
 ANTLR4 grammar syntax support
 ```
 
 2. Abrir el archivo:
 
-```text
+```text id="m5d1yt"
 Comandos.g4
 ```
 
 3. Presionar:
 
-```text
+```text id="n8w6ql"
 F5
 ```
 
 o utilizar:
 
-```text
+```text id="r1v7cp"
 ANTLR4: Open Preview
 ```
 
@@ -287,7 +338,7 @@ desde la paleta de comandos de VS Code.
 
 Contenido de `input.txt`:
 
-```text
+```text id="f8z1mr"
 programa -nombre="Juan" -edad=20 -admin
 ```
 
@@ -295,7 +346,7 @@ programa -nombre="Juan" -edad=20 -admin
 
 # Salida esperada
 
-```text
+```text id="u9q4tb"
 TABLA DE TOKENS:
 Lexema: programa -> Tipo de token: ID
 Lexema: - -> Tipo de token: SUB
@@ -317,13 +368,13 @@ Entrada válida.
 
 Entrada:
 
-```text
+```text id="a6k9vx"
 programa @@
 ```
 
 Salida:
 
-```text
+```text id="b1q7ns"
 Error léxico en línea 1: símbolo '@' no reconocido
 ```
 
@@ -333,13 +384,13 @@ Error léxico en línea 1: símbolo '@' no reconocido
 
 Entrada:
 
-```text
+```text id="e4z2rt"
 programa -
 ```
 
 Salida:
 
-```text
+```text id="w3m8yk"
 Error sintáctico en línea 1: faltó un identificador después del signo '-'
 ```
 
@@ -370,6 +421,10 @@ El Listener se incluye únicamente con fines ilustrativos.
 * Material de cátedra SSL – UTN FRM
 
 ---
+
+# Autor
+
+Maria Paula Bulfón
 
 
 # Autor
