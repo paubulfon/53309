@@ -339,7 +339,7 @@ desde la paleta de comandos de VS Code.
 Contenido de `input.txt`:
 
 ```text id="f8z1mr"
-programa -nombre="Juan" -edad=20 -admin
+programa -nombre="Juan" 
 ```
 
 ---
@@ -427,6 +427,3 @@ El Listener se incluye únicamente con fines ilustrativos.
 Maria Paula Bulfón
 
 
-# Autor
-
-Maria Paula Bulfón
